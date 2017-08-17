@@ -11,7 +11,9 @@
 #include "ultrasound_hcsr04.h"
 
 //constants
-int SERIAL_BAUD_RATE = 9600; //debugging
+int SERIAL_BAUD_RATE = 9600;  //debugging
+int SOUND_DELAY = 500;        //Sound duration
+int LOOP_DELAY = 100;         //Loop delay
 
 //pin assignement
 int PIN_SD_CS = 53; // Pin 53 at Mega board
@@ -38,6 +40,8 @@ UltrasoundHCSR04 hcsr04_1(PIN_TRIGGER1, PIN_ECHO1);
 UltrasoundHCSR04 hcsr04_2(PIN_TRIGGER2, PIN_ECHO2);
 UltrasoundHCSR04 hcsr04_3(PIN_TRIGGER3, PIN_ECHO3);
 
+
+
 //setup
 void setup()
 {
@@ -58,9 +62,9 @@ void setup()
 
 	//tmrpcm init
 	tmrpcm_1.speakerPin = PIN_SPEAKER_1;
-	tmrpcm_1.setVolume(3);
+	tmrpcm_1.setVolume(6);
   tmrpcm_2.speakerPin = PIN_SPEAKER_2;
-  tmrpcm_2.setVolume(3);
+  tmrpcm_2.setVolume(6);
 
   tmrpcm_1.speakerPin2 = PIN_SPEAKER_3;  
 }
@@ -88,27 +92,25 @@ void loop()
     Serial.println(range_3, DEC);
 
 
-  
-  
     if ( (0.1 < range_1) && (range_1 < 0.6) ){
       //play sound
       //tmrpcm_1.play("phone.wav");
-      tmrpcm_1.play("phone.wav",0);
-       tmrpcm_1.play("silence.wav",1);
-      delay(750);
+      tmrpcm_1.play("phone.wav",0, 0);
+      //tmrpcm_1.play("silence.wav",1);
+      delay(SOUND_DELAY);
     }
 
     else if ( (0.1 < range_2) && (range_2 < 0.6) ){
       //play sound
-      tmrpcm_1.play("silence.wav",0);
-      tmrpcm_1.play("alarm.wav",1);
-      delay(500);
+      //tmrpcm_1.play("silence.wav",0);
+      tmrpcm_1.play("alarm.wav", 0, 1);
+      delay(SOUND_DELAY);
     }
 
     else if ( (0.1 < range_3) && (range_3 < 0.6) ){
       //play sound
-      tmrpcm_2.play("phone.wav");
-      delay(500);
+      tmrpcm_2.play("alarm.wav");
+      delay(SOUND_DELAY);
     }
   }
   
@@ -117,7 +119,7 @@ void loop()
     tmrpcm_1.disable();
     tmrpcm_2.disable();
 
-    delay(100);
+    delay(LOOP_DELAY);
 
     
   }
