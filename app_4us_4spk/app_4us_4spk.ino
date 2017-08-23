@@ -19,7 +19,7 @@ int LOOP_DELAY = 100;         //Loop delay
 int PIN_SD_CS = 53; // Pin 53 at Mega board
 
 //pin assignment speakers
-int PIN_SPEAKER_1 = 6; // Pin to audio amplifier input. 5,6,11,46 on Mega
+int PIN_SPEAKER_1 = 6;//6; // Pin to audio amplifier input. 5,6,11,46 on Mega
 int PIN_SPEAKER_2 = 11;
 int PIN_SPEAKER_3 = 46;
 
@@ -66,7 +66,7 @@ void setup()
   tmrpcm_2.speakerPin = PIN_SPEAKER_2;
   tmrpcm_2.setVolume(6);
 
-  tmrpcm_1.speakerPin2 = PIN_SPEAKER_3;  
+  tmrpcm_1.speakerPin2 = PIN_SPEAKER_3;
 }
 
 //main loop
@@ -82,7 +82,7 @@ void loop()
     range_2 = hcsr04_2.getRange();
     range_3 = hcsr04_3.getRange();
 
-  
+
     //print range
     Serial.print("Range_1: ");
     Serial.println(range_1, DEC);
@@ -95,15 +95,17 @@ void loop()
     if ( (0.1 < range_1) && (range_1 < 0.6) ){
       //play sound
       //tmrpcm_1.play("phone.wav");
-      tmrpcm_1.play("phone.wav",0, 0);
+      //tmrpcm_1.play("phone.wav",0, 0);
       //tmrpcm_1.play("silence.wav",1);
+      tmrpcm_1.play("alarm.wav");
       delay(SOUND_DELAY);
     }
 
     else if ( (0.1 < range_2) && (range_2 < 0.6) ){
       //play sound
       //tmrpcm_1.play("silence.wav",0);
-      tmrpcm_1.play("alarm.wav", 0, 1);
+      //tmrpcm_1.play("alarm.wav", 0, 1);
+      tmrpcm_1.play("alarm.wav");
       delay(SOUND_DELAY);
     }
 
@@ -113,7 +115,7 @@ void loop()
       delay(SOUND_DELAY);
     }
   }
-  
+
 
   else{
     tmrpcm_1.disable();
@@ -121,6 +123,6 @@ void loop()
 
     delay(LOOP_DELAY);
 
-    
+
   }
 }
