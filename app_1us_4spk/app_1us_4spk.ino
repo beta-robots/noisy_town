@@ -1,5 +1,19 @@
 //playing sound from a SD card
-
+/* SD reader
+ *    CS  --- 53
+ *    D1  --- 51
+ *    VCC --- 5V
+ *    SCK --- 52
+ *    GND --- GND
+ *    DO  --- 50
+ * Ultrasound
+ *    VCC --- 5V
+ *    Trig -- 32
+ *    Echo -- 33
+ *    GND --- GND
+ * Amplifier
+ *    10uF -- 11 
+ */
 //standard library
 #include <SPI.h>
 #include <SD.h>
