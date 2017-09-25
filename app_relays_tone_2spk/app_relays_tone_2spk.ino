@@ -20,8 +20,8 @@ int PIN_SD_CS = 53; // Pin 53 at Mega board
 int PIN_AUDIO_OUT = 11; // Pin to audio amplifier input. 5,6,11,46 on Mega
 int PIN_US_TRIGGER = 32; //ultrasound trigger
 int PIN_US_ECHO = 33; //ultrasound echo
-int PIN_RELAY_1 = 41;
-int PIN_RELAY_2 = 42;
+int PIN_RELAY_1 = 42;
+int PIN_RELAY_2 = 43;
 
 //play sound TMRpcm object
 //TMRpcm tmrpcm;
@@ -41,7 +41,7 @@ void setup()
 	//set pins to relays as outputs
         pinMode(PIN_RELAY_1, OUTPUT);
         pinMode(PIN_RELAY_2, OUTPUT);
-        
+
 	//SD init
 	/*
   	Serial.println("Initializing SD card...");
